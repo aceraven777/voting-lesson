@@ -25,6 +25,12 @@ class CommunityLinksController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            // channel
+            'title' => 'required',
+            'link' => 'required|active_url',
+        ]);
+
         CommunityLink::from(auth()-> user())
             ->contribute($request->all());
 
